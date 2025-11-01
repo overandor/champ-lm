@@ -1,0 +1,113 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "champ-lm"
+version = "0.1.0"
+description = "Modular research orchestration engine for continuous novelty discovery with LLM ensembles"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "overandor", email = ""}
+]
+keywords = [
+    "llm",
+    "research",
+    "orchestration",
+    "novelty-discovery",
+    "ensemble",
+    "streaming",
+    "kpi"
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "aiohttp==3.9.5",
+    "websockets==12.0",
+    "pydantic==1.10.13",
+    "numpy==1.26.4",
+    "pandas==2.2.2",
+    "scipy==1.11.4",
+    "psutil==5.9.8",
+    "prometheus_client==0.19.0",
+    "requests==2.32.3",
+    "statsmodels==0.14.2",
+    "py-solc-x==2.0.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.2.2",
+    "pytest-asyncio==0.23.6",
+    "black==24.1.1",
+    "isort==5.13.2",
+    "flake8==7.0.0",
+    "mypy==1.8.0",
+    "pytest-cov==4.1.0",
+]
+docs = [
+    "mkdocs==1.5.3",
+    "mkdocs-material==9.5.3",
+]
+ui = [
+    "streamlit==1.28.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/overandor/champ-lm"
+Documentation = "https://github.com/overandor/champ-lm/wiki"
+Repository = "https://github.com/overandor/champ-lm"
+"Bug Tracker" = "https://github.com/overandor/champ-lm/issues"
+
+[tool.setuptools]
+packages = ["src"]
+include-package-data = true
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_mode = 3
+include_trailing_comma = true
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+asyncio_mode = "auto"
+addopts = "--cov=src --cov-report=html --cov-report=term-missing"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
